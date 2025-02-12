@@ -59,6 +59,7 @@ function loadTask(taskId) {
               color: red;
             }
           `;
+          
       // Fallback CSS if the CSS file is not loaded
       const fallbackStyleSheet = document.createElement("style");
       fallbackStyleSheet.type = "text/css";

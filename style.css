@@ -1,0 +1,61 @@
+/* Example CSS for styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+#task-list {
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 2px solid #ddd;
+}
+
+#task-list h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#task-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#task-list ul li {
+  margin-bottom: 10px;
+}
+
+#task-list ul li button {
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#task-list ul li button:hover {
+  background-color: #45a049;
+}
+
+#content {
+  padding: 20px;
+  background-color: white;
+}
+
+button {
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #e53935;
+}

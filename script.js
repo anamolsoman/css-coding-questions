@@ -4,9 +4,9 @@ function loadTask(taskId) {
 
   // Hide the task list
   taskListDiv.style.display = "none";
-
   // Clear current content except for the back button
   contentDiv.innerHTML = "";
+  contentDiv.style.display = "block";
 
   // Create a Back button to return to the task list
   const backButton = document.createElement("button");
@@ -16,6 +16,7 @@ function loadTask(taskId) {
   // Attach the event listener to the back button before adding it to contentDiv
   backButton.addEventListener("click", function () {
     console.log("Back button clicked");
+    contentDiv.style.display = "none"; // Hide the content
     taskListDiv.style.display = "block"; // Show the task list again
     contentDiv.innerHTML = ""; // Clear current content
   });

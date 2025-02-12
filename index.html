@@ -7,15 +7,42 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="task-list">
-      <h1>Select a Task</h1>
-      <ul>
-        <li><button onclick="loadTask('grid-layout')">Grid Layout</button></li>
-        <li><button onclick="loadTask('task2')">Task 2</button></li>
-        <!-- Add more tasks here -->
-      </ul>
+    <div id="task-list" class="task-list-container">
+      <h1 class="task-list-title">Select a Task</h1>
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th>Task Title</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Grid Layout</td>
+            <td>A basic grid layout using CSS</td>
+            <td>
+              <button onclick="loadTask('grid-layout')" class="task-button">
+                View
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Task 2</td>
+            <td>Details of task 2</td>
+            <td>
+              <button onclick="loadTask('task2')" class="task-button">
+                View
+              </button>
+            </td>
+          </tr>
+          <!-- Add more tasks here -->
+        </tbody>
+      </table>
     </div>
-    <div id="content"></div>
+
+    <div id="content" class="task-content-container"></div>
+
     <script src="script.js"></script>
   </body>
 </html>

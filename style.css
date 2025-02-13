@@ -9,8 +9,8 @@ body {
 
 /* Task list container */
 .task-list-container {
-  width: 80%;
-  max-width: 1000px;
+  /* width: 80%;
+  max-width: 1000px; */
   margin: 20px;
   padding: 20px;
   background-color: #fff;

@@ -16,6 +16,8 @@ function loadTask(taskId) {
 
   // Create a Back button to return to the task list
   const backButton = document.createElement("button");
+  const runButton = document.createElement("button");
+  runButton.innerText = "Run Code";
   backButton.innerText = "Back to Task List";
   backButton.id = "back-button";
 
@@ -28,39 +30,57 @@ function loadTask(taskId) {
     taskListDiv.style.display = "block"; // Show the task list again
     contentDiv.innerHTML = ""; // Clear current content
   });
-
+  runButton.addEventListener("click", function () {
+    loadHtml();
+    loadCSS();
+  });
   contentDiv.appendChild(backButton);
+  contentDiv.appendChild(runButton);
+
+  function loadHtml() {
+    fetch(`questions/${taskId}/index.html`)
+      .then((response) => response.text())
+      .then((html) => {
+        const div = document.createElement("div");
+        div.id = "task-content";
+        div.innerHTML = html; // Create a div with the loaded HTML
+        htmlCodeBlock.innerText = html; // Display the HTML code in the textarea
+        if (document.getElementById("task-content")) {
+          document.getElementById("task-content").remove();
+        }
+        contentDiv.appendChild(div); // Append the content to contentDiv
+      })
+      .catch((error) => {
+        console.error("Error loading HTML:", error);
+        contentDiv.innerHTML +=
+          "<p>Error loading HTML content. Please try again later.</p>";
+      });
+  }
+  loadHtml();
 
   // Load HTML content
-  fetch(`questions/${taskId}/index.html`)
-    .then((response) => response.text())
-    .then((html) => {
-      const div = document.createElement("div");
-      div.innerHTML = html; // Create a div with the loaded HTML
-      htmlCodeBlock.innerText = html; // Display the HTML code in the textarea
-      contentDiv.appendChild(div); // Append the content to contentDiv
-    })
-    .catch((error) => {
-      console.error("Error loading HTML:", error);
-      contentDiv.innerHTML +=
-        "<p>Error loading HTML content. Please try again later.</p>";
-    });
 
   // Load CSS content
-  fetch(`questions/${taskId}/style.css`)
-    .then((response) => response.text())
-    .then((css) => {
-      // Create a new <style> element and insert the CSS into the <head>
-      const styleSheet = document.createElement("style");
-      styleSheet.type = "text/css";
-      styleSheet.innerText = css;
-      cssCodeBlock.innerText = css; // Display the CSS code in the textarea
-      styleSheet.setAttribute("data-task-id", taskId); // Optional attribute to identify styles
-      document.head.appendChild(styleSheet);
-    })
-    .catch((error) => {
-      console.error("Error loading CSS:", error);
-      const fallbackCSS = `
+  function loadCSS() {
+    fetch(`questions/${taskId}/style.css`)
+      .then((response) => response.text())
+      .then((css) => {
+        // Create a new <style> element and insert the CSS into the <head>
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = css;
+        cssCodeBlock.innerText = css; // Display the CSS code in the textarea
+        styleSheet.setAttribute("data-task-id", taskId); // Optional attribute to identify styles
+        if (document.head.querySelector(`style[data-task-id="${taskId}"]`)) {
+          document.head
+            .querySelector(`style[data-task-id="${taskId}"]`)
+            .remove();
+        }
+        document.head.appendChild(styleSheet);
+      })
+      .catch((error) => {
+        console.error("Error loading CSS:", error);
+        const fallbackCSS = `
             body {
               background-color: #f0f0f0;
               color: #333;
@@ -70,10 +90,12 @@ function loadTask(taskId) {
             }
           `;
 
-      // Fallback CSS if the CSS file is not loaded
-      const fallbackStyleSheet = document.createElement("style");
-      fallbackStyleSheet.type = "text/css";
-      fallbackStyleSheet.innerText = fallbackCSS;
-      document.head.appendChild(fallbackStyleSheet);
-    });
+        // Fallback CSS if the CSS file is not loaded
+        const fallbackStyleSheet = document.createElement("style");
+        fallbackStyleSheet.type = "text/css";
+        fallbackStyleSheet.innerText = fallbackCSS;
+        document.head.appendChild(fallbackStyleSheet);
+      });
+  }
+  loadCSS();
 }

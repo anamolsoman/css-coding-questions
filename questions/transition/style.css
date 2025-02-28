@@ -1,0 +1,23 @@
+#accordian {
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.accordian-title {
+  padding: 1rem;
+}
+
+.accordian-description {
+  padding: 0rem;
+  opacity: 0;
+  max-height: 0px;
+  box-sizing: border-box;
+  transition: max-height 1s ease-in-out, opacity 0.3s ease-in-out,
+    padding 1s ease-in-out; /* Smooth transition */
+}
+
+.accordian-title:hover + .accordian-description {
+  opacity: 1;
+  max-height: 200px;
+  padding: 1rem;
+}
